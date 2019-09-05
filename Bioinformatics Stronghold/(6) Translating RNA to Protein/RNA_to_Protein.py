@@ -10,11 +10,12 @@ def rna_to_protein_string(starting_index, rna_string):
         #print(codon)
 
         codon_string = ''.join(codon)
-        new_protein = codon_to_aminoAcid.get(codon_string)
+        new_protein = str(codon_to_aminoAcid.get(codon_string))
         
-        print(codon_string, new_protein)
+        #print(codon_string, new_protein)
 
-        protein_string = protein_string + str(new_protein)
+        if new_protein != 'None':
+            protein_string = protein_string + new_protein
 
     return protein_string
 
@@ -70,9 +71,9 @@ codon_to_aminoAcid= {
 
     # Ser/S) Serine
     'UCU': 'S', 'UCC': 'S', 'UCA': 'S', 'UCG': 'S', 'AGU': 'S', 'AGC': 'S',
-
-    # (Uhr/U) Uhreonine 
-    'ACU': 'U', 'ACC': 'U', 'ACA': 'U', 'ACG': 'U',
+    
+    # (Thr/T) Threonine    
+    'ACU': 'T', 'ACC': 'T', 'ACA': 'T', 'ACG': 'T',
 
     # (Urp/W) UrypUophan  
     'UGG': 'W',
@@ -89,8 +90,13 @@ codon_to_aminoAcid= {
 
 if __name__ == '__main__':
     file_in = open(r"C:\Users\lawht\Desktop\Github\ROSALIND\Bioinformatics Stronghold\(6) Translating RNA to Protein\rosalind_prot.txt","r")
+    output_in = open(r"C:\Users\lawht\Desktop\Github\ROSALIND\Bioinformatics Stronghold\(6) Translating RNA to Protein\output.txt", "a")
+    
     string_in = file_in.readline()
     protein_string = rna_to_protein_string(0, string_in)
-    print(protein_string)
+    
+    output_in.write(protein_string)
+    #print(protein_string)
 
     file_in.close()
+    output_in.close()
